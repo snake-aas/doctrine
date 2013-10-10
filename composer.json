@@ -1,5 +1,5 @@
 {
-	"name": "nella/doctrine",
+	"name": "snake-aas/doctrine",
 	"type": "nette-addon",
 	"description": "Doctrine 2 ORM and Migrations addon for Nette Framework",
 	"keywords": ["doctrine", "nette", "orm", "migrations", "nella", "addon"],
@@ -15,6 +15,11 @@
 		{
 			"name": "Nella Project",
 			"homepage": "http://nella-project.org"
+		},
+		{
+			"name": "Martin Snake.AAS Grossmann",
+			"homepage": "http://vyvoj.net"
+			"email": "martin@vyvoj.net",
 		}
 	],
 	"support":{
@@ -33,7 +38,7 @@
 		"doctrine/orm": "2.3.*"
 	},
 	"suggest": {
-		"nella/console": "Need for console support",
+		"kdyby/console": "Need for console support",
 		"doctrine/migrations": "Need for migrations support",
 		"nella/gedmo": "Integrate Doctrine Gedmo extension to Nette Framework"
 	}
