@@ -10,7 +10,7 @@
 
 namespace Nella\Doctrine\Config;
 
-use Nella\Console\Config\Extension as CExtension,
+use Kdyby\Console\DI\ConsoleExtension as CExtension,
 	Nette\Diagnostics\Debugger,
 	Nette\Config\Compiler,
 	Nette\Config\Configurator,
@@ -173,7 +173,7 @@ class Extension extends \Nette\Config\CompilerExtension
 	 */
 	protected function processConsole($entityManager = NULL, $connection = NULL)
 	{
-		if (!class_exists('Nella\Console\Config\Extension')) {
+		if (!class_exists('Kdyby\Console\DI\ConsoleExtension')) {
 			throw new \Nette\InvalidStateException('Missing console extension');
 		}
 
@@ -182,45 +182,45 @@ class Extension extends \Nette\Config\CompilerExtension
 		// DBAL
 		$builder->addDefinition($this->prefix('consoleCommandDBALRunSql'))
 			->setClass('Doctrine\DBAL\Tools\Console\Command\RunSqlCommand')
-			->addTag(CExtension::COMMAND_TAG_NAME)
+			->addTag(CExtension::COMMAND_TAG)
 			->setAutowired(FALSE);
 		$builder->addDefinition($this->prefix('consoleCommandDBALImport'))
 			->setClass('Doctrine\DBAL\Tools\Console\Command\ImportCommand')
-			->addTag(CExtension::COMMAND_TAG_NAME)
+			->addTag(CExtension::COMMAND_TAG)
 			->setAutowired(FALSE);
 
 		// console commands - ORM
 		$builder->addDefinition($this->prefix('consoleCommandORMCreate'))
 			->setClass('Doctrine\ORM\Tools\Console\Command\SchemaTool\CreateCommand')
-			->addTag(CExtension::COMMAND_TAG_NAME)
+			->addTag(CExtension::COMMAND_TAG)
 			->setAutowired(FALSE);
 		$builder->addDefinition($this->prefix('consoleCommandORMUpdate'))
 			->setClass('Doctrine\ORM\Tools\Console\Command\SchemaTool\UpdateCommand')
-			->addTag(CExtension::COMMAND_TAG_NAME)
+			->addTag(CExtension::COMMAND_TAG)
 			->setAutowired(FALSE);
 		$builder->addDefinition($this->prefix('consoleCommandORMDrop'))
 			->setClass('Doctrine\ORM\Tools\Console\Command\SchemaTool\DropCommand')
-			->addTag(CExtension::COMMAND_TAG_NAME)
+			->addTag(CExtension::COMMAND_TAG)
 			->setAutowired(FALSE);
 		$builder->addDefinition($this->prefix('consoleCommandORMGenerateProxies'))
 			->setClass('Doctrine\ORM\Tools\Console\Command\GenerateProxiesCommand')
-			->addTag(CExtension::COMMAND_TAG_NAME)
+			->addTag(CExtension::COMMAND_TAG)
 			->setAutowired(FALSE);
 		$builder->addDefinition($this->prefix('consoleCommandORMRunDql'))
 			->setClass('Doctrine\ORM\Tools\Console\Command\RunDqlCommand')
-			->addTag(CExtension::COMMAND_TAG_NAME)
+			->addTag(CExtension::COMMAND_TAG)
 			->setAutowired(FALSE);
 
 		if ($entityManager) {
 			$builder->addDefinition($this->prefix('consoleHelperEntityManager'))
 				->setClass('Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper', array($entityManager))
-				->addTag(CExtension::HELPER_TAG_NAME, 'em')
+				->addTag(CExtension::HELPER_TAG, 'em')
 				->setAutowired(FALSE);
 		}
 		if ($connection) {
 			$builder->addDefinition($this->prefix('consoleHelperConnection'))
 				->setClass('Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper', array($connection))
-				->addTag(CExtension::HELPER_TAG_NAME, 'db')
+				->addTag(CExtension::HELPER_TAG, 'db')
 				->setAutowired(FALSE);
 		}
 	}
